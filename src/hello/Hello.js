@@ -1,3 +1,3 @@
 export function ReduxBased() {
-  return <a>Hello world</a>
+  return <h1>Hello world</h1>
 }

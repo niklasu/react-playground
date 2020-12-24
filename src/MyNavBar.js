@@ -5,7 +5,7 @@ export function MyNavBar() {
             <Navbar bg={'light'}>
                 <Nav.Link href="/">Main</Nav.Link>
                 <Nav.Link href="/users">Users</Nav.Link>
-                <Nav.Link href="/redux">Redux</Nav.Link>
+                <Nav.Link href="/redux">Another Page</Nav.Link>
             </Navbar>
         );
 }

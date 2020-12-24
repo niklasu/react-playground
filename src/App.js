@@ -2,7 +2,7 @@ import {Route, Switch} from 'react-router-dom';
 import {MainComponent} from "./main/MainComponent";
 import {UserComponent} from "./users/UserComponent";
 import {MyNavBar} from "./MyNavBar";
-import {ReduxBased} from "./redux/Redux";
+import {ReduxBased} from "./hello/Hello";
 
 function App() {
     return (

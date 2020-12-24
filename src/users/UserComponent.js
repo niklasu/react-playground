@@ -14,9 +14,9 @@ export function UserComponent() {
   useEffect(() => {
     if (currentUser) {
       console.log('loading user todos', currentUser.id);
-      fetch(`https://jsonplaceholder.typicode.com/todos`)
+      fetch(`https://jsonplaceholder.typicode.com/todos/?userId=${currentUser.id}`)
         .then(response => response.json())
-        .then(value => setCurrentTodos(value.filter(t => t.userId === currentUser.id)));
+        .then(setCurrentTodos);
     }
 
   }, [currentUser]);
@@ -26,20 +26,23 @@ export function UserComponent() {
   return <Container>
     <Row>
       <Col md={4}>
+        <h3>Users</h3>
         <ListGroup>
           {users.map(u => <ListGroupItem action onClick={() => setCurrentUser(u)}>{u.name}</ListGroupItem>)}
         </ListGroup>
       </Col>
       <Col md={4}>
-          <ListGroup>
-            {currentTodos.map(t => <ListGroupItem action onClick={() => setCurrentTodo(t)}>{t.title}</ListGroupItem>)}
-          </ListGroup>
+        <h3>Users TODOs</h3>
+        <ListGroup>
+          {currentTodos.map(t => <ListGroupItem action onClick={() => setCurrentTodo(t)}>{t.title}</ListGroupItem>)}
+        </ListGroup>
       </Col>
       {currentTodo ?
         <Col md={4}>
+          <h3>TODO Details</h3>
           <Card
-            border={currentTodo.completed? 'success' : 'danger'}
-            style={{ width: '18rem' }}
+            border={currentTodo.completed ? 'success' : 'danger'}
+            style={{width: '18rem'}}
             className="mb-2"
           >
             <Card.Body>

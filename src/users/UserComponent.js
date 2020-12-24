@@ -18,7 +18,6 @@ export function UserComponent() {
         .then(response => response.json())
         .then(setCurrentTodos);
     }
-
   }, [currentUser]);
 
   const [currentTodo, setCurrentTodo] = useState(null);

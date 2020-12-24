@@ -1,4 +1,4 @@
-import {Col, Container, ListGroup, ListGroupItem, Row} from "react-bootstrap";
+import {Card, Col, Container, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 import {useEffect, useState} from "react";
 
 export function UserComponent() {
@@ -21,6 +21,8 @@ export function UserComponent() {
 
   }, [currentUser]);
 
+  const [currentTodo, setCurrentTodo] = useState(null);
+
   return <Container>
     <Row>
       <Col md={4}>
@@ -28,13 +30,24 @@ export function UserComponent() {
           {users.map(u => <ListGroupItem action onClick={() => setCurrentUser(u)}>{u.name}</ListGroupItem>)}
         </ListGroup>
       </Col>
-      <Col md={8}>
-        <Row>
+      <Col md={4}>
           <ListGroup>
-            {currentTodos.map(t => <ListGroupItem>{t.title}</ListGroupItem>)}
+            {currentTodos.map(t => <ListGroupItem action onClick={() => setCurrentTodo(t)}>{t.title}</ListGroupItem>)}
           </ListGroup>
-        </Row>
       </Col>
+      {currentTodo ?
+        <Col md={4}>
+          <Card
+            border={currentTodo.completed? 'success' : 'danger'}
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Body>
+              <Card.Text>{currentTodo.title}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+        : null}
     </Row>
 
   </Container>;

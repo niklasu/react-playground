@@ -2,7 +2,7 @@ import {Route, Switch} from 'react-router-dom';
 import {MainComponent} from "./main/MainComponent";
 import {UserComponent} from "./users/UserComponent";
 import {MyNavBar} from "./MyNavBar";
-import {UseMemoExample} from "./hello/Hello";
+import {ParentComponent} from "./hello/Hello";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Switch>
         <Route path="/" component={MainComponent} exact/>
         <Route path="/users" component={UserComponent} exact/>
-        <Route path="/redux" component={UseMemoExample} exact/>
+        <Route path="/redux" component={ParentComponent} exact/>
       </Switch>
     </main>
   )

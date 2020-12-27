@@ -5,10 +5,6 @@ export const Snake = function Snake() {
   const [x, setX] = useState(200);
   const [y, setY] = useState(200);
   const [currentDirection, setCurrentDirection] = useState('ArrowLeft');
-  useEffect(() => {
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -18,7 +14,7 @@ export const Snake = function Snake() {
       ctx.lineTo(x - 10, y);
     }
     if (currentDirection === 'ArrowRight') {
-      ctx.lineTo(x - 10, y);
+      ctx.lineTo(x + 10, y);
     }
     if (currentDirection === 'ArrowUp') {
       ctx.lineTo(x, y - 10);
@@ -27,20 +23,21 @@ export const Snake = function Snake() {
       ctx.lineTo(x, y + 10);
     }
     ctx.stroke();
-  }, [currentDirection, x, y]);
+  }, [x, y]);
 
   setTimeout(() => {
+    const number = 10;
     if (currentDirection === 'ArrowLeft') {
-      setX(x - 10)
+      setX(x - number)
     }
     if (currentDirection === 'ArrowRight') {
-      setX(x + 10)
+      setX(x + number)
     }
     if (currentDirection === 'ArrowUp') {
-      setY(y - 10)
+      setY(y - number)
     }
     if (currentDirection === 'ArrowDown') {
-      setY(y + 10)
+      setY(y + number)
     }
 
   }, 100);

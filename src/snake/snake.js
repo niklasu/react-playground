@@ -6,6 +6,7 @@ export const Snake = function Snake() {
   const [x, setX] = useState(INITIAL_X);
   const [y, setY] = useState(INITIAL_X);
   const [currentDirection, setCurrentDirection] = useState('ArrowLeft');
+  const [gameOver, setGameOver] = useState(false);
 
   const [path, setPath] = useState([]);
 
@@ -31,45 +32,55 @@ export const Snake = function Snake() {
 
     ctx.lineWidth = 2;
     ctx.moveTo(x, y);
+    let moveTarget = [];
     if (currentDirection === 'ArrowLeft') {
-      ctx.lineTo(x - 10, y);
+      moveTarget = [x - 10, y]
     }
     if (currentDirection === 'ArrowRight') {
-      ctx.lineTo(x + 10, y);
+      moveTarget = [x + 10, y]
     }
     if (currentDirection === 'ArrowUp') {
-      ctx.lineTo(x, y - 10);
+      moveTarget = [x, y - 10]
     }
     if (currentDirection === 'ArrowDown') {
-      ctx.lineTo(x, y + 10);
+      moveTarget = [x, y + 10]
     }
+    ctx.lineTo(moveTarget[0], moveTarget[1])
     ctx.stroke();
-  }, [x, y]);
 
-  setTimeout(() => {
-    const number = 10;
-    if (currentDirection === 'ArrowLeft') {
-      if (x <= 0) {
-        setX(400);
-      } else {
-        setX(x - number);
+    path.forEach(item => {
+      if (item[0] === moveTarget[0] && item[1] === moveTarget[1]) {
+        setGameOver(true);
       }
-    }
-    if (currentDirection === 'ArrowRight') {
-      setX((x + number) % 400);
-    }
-    if (currentDirection === 'ArrowUp') {
-      if (y <= 0) {
-        setY(400);
-      } else {
-        setY(y - number);
-      }
-    }
-    if (currentDirection === 'ArrowDown') {
-      setY((y + number)%400)
-    }
+    })
+  }, [x, y, gameOver]);
 
-  }, 100);
+  if (!gameOver) {
+    setTimeout(() => {
+      const number = 10;
+      if (currentDirection === 'ArrowLeft') {
+        if (x <= 0) {
+          setX(400);
+        } else {
+          setX(x - number);
+        }
+      }
+      if (currentDirection === 'ArrowRight') {
+        setX((x + number) % 400);
+      }
+      if (currentDirection === 'ArrowUp') {
+        if (y <= 0) {
+          setY(400);
+        } else {
+          setY(y - number);
+        }
+      }
+      if (currentDirection === 'ArrowDown') {
+        setY((y + number) % 400)
+      }
+
+    }, 100)
+  }
 
   useEffect(() => {
     document.addEventListener("keydown", e => setCurrentDirection(e.key));

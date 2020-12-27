@@ -6,6 +6,7 @@ export function MyNavBar() {
       <Nav.Link href="/">Main</Nav.Link>
       <Nav.Link href="/users">Users</Nav.Link>
       <Nav.Link href="/redux">React.memo</Nav.Link>
+      <Nav.Link href="/snake">snake</Nav.Link>
     </Navbar>
   );
 }

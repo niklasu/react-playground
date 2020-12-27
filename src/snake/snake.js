@@ -14,9 +14,7 @@ export const Snake = function Snake() {
     const ctx = canvas.getContext('2d')
 
     function clear(erem) {
-      ctx.fillStyle = "#FF0000";
       ctx.beginPath()
-      //ctx.fillRect(erem[0]-1, erem[1]-1, 10, 2);
       ctx.clearRect(erem[0] - 1, erem[1] - 1, 10, 10);
     }
 

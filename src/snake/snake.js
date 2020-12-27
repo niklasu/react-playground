@@ -14,12 +14,10 @@ export const Snake = function Snake() {
     const ctx = canvas.getContext('2d')
 
     function clear(erem) {
-      console.log(`removing ${erem}`)
-      //ctx.clearRect(erem[0]-10, erem[1]-10, 20, 20);
       ctx.fillStyle = "#FF0000";
       ctx.beginPath()
       //ctx.fillRect(erem[0]-1, erem[1]-1, 10, 2);
-      ctx.clearRect(erem[0]-1, erem[1]-1, 10, 10);
+      ctx.clearRect(erem[0] - 1, erem[1] - 1, 10, 10);
     }
 
     let p = path;
@@ -28,11 +26,9 @@ export const Snake = function Snake() {
       p[pLength] = [x, y];
     } else {
       clear(p.shift())
-      p = [...p, [x,y]]
+      p = [...p, [x, y]]
     }
     setPath(p)
-    //console.log(path);
-
 
 
     ctx.lineWidth = 2;
@@ -55,16 +51,24 @@ export const Snake = function Snake() {
   setTimeout(() => {
     const number = 10;
     if (currentDirection === 'ArrowLeft') {
-      setX(x - number)
+      if (x <= 0) {
+        setX(400);
+      } else {
+        setX(x - number);
+      }
     }
     if (currentDirection === 'ArrowRight') {
-      setX(x + number)
+      setX((x + number) % 400);
     }
     if (currentDirection === 'ArrowUp') {
-      setY(y - number)
+      if (y <= 0) {
+        setY(400);
+      } else {
+        setY(y - number);
+      }
     }
     if (currentDirection === 'ArrowDown') {
-      setY(y + number)
+      setY((y + number)%400)
     }
 
   }, 100);
@@ -74,6 +78,6 @@ export const Snake = function Snake() {
   }, [])
 
   return <>
-    <canvas ref={canvasRef} width="400" height="400"/>
+    <canvas style={{border: '1px solid black'}} ref={canvasRef} width="400" height="400"/>
   </>;
 }
